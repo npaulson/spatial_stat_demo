@@ -8,7 +8,6 @@ Noah Paulson, 5/28/2014
 """
 
 import numpy as np
-import vtk
 
 
 def independent_columns(A, tol=1e-05):
