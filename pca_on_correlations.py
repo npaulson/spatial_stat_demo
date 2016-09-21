@@ -8,7 +8,7 @@ import h5py
 
 def doPCA(el, ns_set, H, set_id_set, wrt_file):
 
-    n_corr = H**2
+    n_corr = H-1
 
     """combine the spatial statistics into one data matrix"""
     st = time.time()

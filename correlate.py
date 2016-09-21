@@ -12,33 +12,30 @@ def correlate(el, ns, H, set_id, wrt_file):
     M = f.get('M_%s' % set_id)[...]
 
     FF = f.create_dataset('FF_%s' % set_id,
-                          (ns, H, H, el, el),
+                          (ns, H-1, el, el),
                           dtype='complex128')
 
     ff = f.create_dataset('ff_%s' % set_id,
-                          (ns, H, H, el, el),
+                          (ns, H-1, el, el),
                           dtype='float64')
 
     S = el**2
 
-    cmax = H*H
-    cmat = np.unravel_index(np.arange(cmax), [H, H])
-    cmat = np.array(cmat).T
+    cmax = H-1
 
     for c in xrange(cmax):
 
-        ii, jj = cmat[c, :]
         if np.mod(c, 10) == 0 and c > 0:
             print "correlation number %s computed" % c
 
-        M1 = M[:, ii, ...]
+        M1 = M[:, 0, ...]
         mag1 = np.abs(M1)
         ang1 = np.arctan2(M1.imag, M1.real)
         exp1 = np.exp(-1j*ang1)
         term1 = mag1*exp1
         del M1, mag1, ang1, exp1
 
-        M2 = M[:, jj, ...]
+        M2 = M[:, c, ...]
         mag2 = np.abs(M2)
         ang2 = np.arctan2(M2.imag, M2.real)
         exp2 = np.exp(1j*ang2)
@@ -48,13 +45,13 @@ def correlate(el, ns, H, set_id, wrt_file):
         FFtmp = term1*term2/S
         del term1, term2
 
-        FF[:, ii, jj, ...] = FFtmp
+        FF[:, c, ...] = FFtmp
 
         tmp = np.fft.ifftn(FFtmp, [el, el], [1, 2])
-        ff[:, ii, jj, ...] = tmp.real
+        ff[:, c, ...] = tmp.real
 
         if c == 0:
-            szgb = np.round(H*H*FFtmp.nbytes/(1e9), 3)
+            szgb = np.round((H-1)*FFtmp.nbytes/(1e9), 3)
             msg = "ff = %s gb" % szgb
             rr.WP(msg, wrt_file)
 

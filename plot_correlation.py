@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 import h5py
 
 
-def pltcorr(el, ns, set_id, sn, iA, iB):
+def pltcorr(el, ns, set_id, sn, iA):
 
     f = h5py.File("spatial_stats.hdf5", 'r')
     sves = f.get('sves_%s' % set_id)[sn, ...]
-    corr = f.get('ff_%s' % set_id)[sn, iA, iB, ...]
+    corr = f.get('ff_%s' % set_id)[sn, iA, ...]
     f.close()
 
     corr_centered = np.fft.fftshift(corr)
@@ -25,7 +25,7 @@ def pltcorr(el, ns, set_id, sn, iA, iB):
     ax = plt.imshow(corr_centered, origin='lower',
                     interpolation='none', cmap='jet')
     plt.colorbar(ax)
-    plt.title('correlation: %s, %s' % (iA, iB))
+    plt.title('correlation: 0, %s' % iA)
 
     plt.show()
 
@@ -37,6 +37,5 @@ if __name__ == '__main__':
     step = 0
     sn = 29
     iA = 1
-    iB = 2
 
-    pltcorr(el, ns, set_id, step, sn, iA, iB)
+    pltcorr(el, ns, set_id, step, sn, iA)

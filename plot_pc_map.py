@@ -24,7 +24,7 @@ def pltmap(ns_set, set_id_set, pcA, pcB):
         meanA = reduced[:, pcA].mean()
         meanB = reduced[:, pcB].mean()
 
-        plt.text(meanA, meanB+1, set_id_set[ii],
+        plt.text(meanA, meanB+0.2, set_id_set[ii],
                  horizontalalignment='center',
                  verticalalignment='center')
 
