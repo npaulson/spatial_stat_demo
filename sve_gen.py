@@ -77,6 +77,8 @@ def bicrystal(el, ns, H, set_id, wrt_file):
         # print np.unique(sve)
         sves[sn, ...] = sve.reshape(el, el)
 
+    tmp = sves[...]
+
     f.close()
 
     end = time.time()
@@ -84,6 +86,8 @@ def bicrystal(el, ns, H, set_id, wrt_file):
 
     msg = "%s bicrystal SVEs generated: %ss" % (ns, timeE)
     rr.WP(msg, wrt_file)
+
+    return tmp
 
 
 def bicrystal_orthog(el, ns, H, set_id, wrt_file):
@@ -109,6 +113,8 @@ def bicrystal_orthog(el, ns, H, set_id, wrt_file):
         elif direc == 1:
             sves[sn, :, :vf] = h2
 
+    tmp = sves[...]
+
     f.close()
 
     end = time.time()
@@ -116,6 +122,8 @@ def bicrystal_orthog(el, ns, H, set_id, wrt_file):
 
     msg = "%s bicrystal SVEs generated: %ss" % (ns, timeE)
     rr.WP(msg, wrt_file)
+
+    return tmp
 
 
 def improcess(el, ns, H, set_id, wrt_file):
@@ -156,6 +164,8 @@ def improcess(el, ns, H, set_id, wrt_file):
 
         sves[sn, ...] = sve.reshape(el, el)
 
+    tmp = sves[...]
+
     f.close()
 
     end = time.time()
@@ -163,6 +173,8 @@ def improcess(el, ns, H, set_id, wrt_file):
 
     msg = "%s bicrystal SVEs generated: %ss" % (ns, timeE)
     rr.WP(msg, wrt_file)
+
+    return tmp
 
 
 def delta(el, ns, H, set_id, wrt_file):
@@ -180,6 +192,8 @@ def delta(el, ns, H, set_id, wrt_file):
         sves[sn, ...] = h1
         sves[sn, 10, 10] = h2
 
+    tmp = sves[...]
+
     f.close()
 
     end = time.time()
@@ -187,6 +201,8 @@ def delta(el, ns, H, set_id, wrt_file):
 
     msg = "%s delta SVEs generated: %ss" % (ns, timeE)
     rr.WP(msg, wrt_file)
+
+    return tmp
 
 
 def inclusion(el, ns, H, set_id, wrt_file, vfrac):
@@ -214,6 +230,8 @@ def inclusion(el, ns, H, set_id, wrt_file, vfrac):
 
         sves[sn, ...] = svetmp.reshape(el, el)
 
+    tmp = sves[...]
+
     f.close()
 
     end = time.time()
@@ -221,6 +239,8 @@ def inclusion(el, ns, H, set_id, wrt_file, vfrac):
 
     msg = "%s SVEs with inclusions generated: %ss" % (ns, timeE)
     rr.WP(msg, wrt_file)
+
+    return tmp
 
 
 def inclusion_red(el, ns, H, set_id, wrt_file, vfrac):
@@ -259,6 +279,8 @@ def inclusion_red(el, ns, H, set_id, wrt_file, vfrac):
 
         sves[sn, ...] = svetmp.reshape(el, el)
 
+    tmp = sves[...]
+
     f.close()
 
     end = time.time()
@@ -266,6 +288,8 @@ def inclusion_red(el, ns, H, set_id, wrt_file, vfrac):
 
     msg = "%s SVEs with inclusions generated: %ss" % (ns, timeE)
     rr.WP(msg, wrt_file)
+
+    return tmp
 
 
 def scale_array(raw):
